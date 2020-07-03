@@ -62,7 +62,7 @@ fn main() {
 
                 // Convert input into `Parameters` (`Vec<(&str, &str)>`)
                 let params: Parameters = args.split(',')
-                .map(|arg| arg.trim().split(":").collect())
+                .map(|arg| arg.split(":").map(|e| e.trim()).collect())
                 .map(|v: Vec<&str>| (v[0], v[1]))
                 .collect();
 

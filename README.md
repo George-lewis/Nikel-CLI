@@ -8,9 +8,9 @@ Using the library [Nikel-rs](https://github.com/George-lewis/Nikel-rs) to access
 
 Enter commands into the prompt, commands take the form:
 
-`[type] [attribute]:(operator)[value],( )[...]`
+`[type] [attribute]:(operator)[value],[...]`
 
-Where a space after the comma is optional
+Note: The application trims strings, so feel free to add whitespace
 
 where `[attribute]` is any attribute from the corresponding schema
 
@@ -36,5 +36,5 @@ where `[type]` is any of:
 `food campus:george,tags:coffee`
 > Query all restuarants downtown that serve coffee
 
-`food campus:george, tags:coffee, tags:snacks, address:bloor`
+`food campus:george, tags: coffee, tags:snacks, address: bloor`
 > Query all restuarants downtown that serve coffee, snacks, and are on Bloor street

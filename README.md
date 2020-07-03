@@ -10,6 +10,8 @@ Enter commands into the prompt, commands take the form:
 
 `[type] [attribute]:(operator)[value],[...]`
 
+where `(operator)` is optional and is any of the operators described at: https://docs.nikel.ml/docs/query_guide#advanced-queries
+
 where `[type]` is any of:
 - courses, classes
 - textbooks, tb

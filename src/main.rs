@@ -58,17 +58,11 @@ fn main() {
                 if line.trim().is_empty() {
                     continue;
                 }
-                let input: Vec<&str> = line
-                                        .split_ascii_whitespace()
-                                        .collect();
-                if input.len() < 2 {
-                    continue;
-                }
-                let command = input[0];
+                let (command, args) = split_once(&line, ' ');
 
-                // Convert input into `Parameters` (`HashMap<&str, &str>`)
-                let args: Parameters = input[1].split(",")
-                .map(|arg| arg.split(":").collect())
+                // Convert input into `Parameters` (`Vec<(&str, &str)>`)
+                let params: Parameters = args.split(',')
+                .map(|arg| arg.trim().split(":").collect())
                 .map(|v: Vec<&str>| (v[0], v[1]))
                 .collect();
 
@@ -76,13 +70,13 @@ fn main() {
 
                 // Make appropriate API call
                 match command {
-                    "courses" | "classes" => out = to_string(client.courses(args).unwrap()),
-                    "textbooks" | "tb" => out = to_string(client.textbooks(args).unwrap()),
-                    "exams" => out = to_string(client.exams(args).unwrap()),
-                    "evals" => out = to_string(client.evals(args).unwrap()),
-                    "food" => out = to_string(client.food(args).unwrap()),
-                    "services" | "serv" => out = to_string(client.services(args).unwrap()),
-                    "parking" | "park" => out = to_string(client.parking(args).unwrap()),
+                    "courses" | "classes" => out = to_string(client.courses(params).unwrap()),
+                    "textbooks" | "tb" => out = to_string(client.textbooks(params).unwrap()),
+                    "exams" => out = to_string(client.exams(params).unwrap()),
+                    "evals" => out = to_string(client.evals(params).unwrap()),
+                    "food" => out = to_string(client.food(params).unwrap()),
+                    "services" | "serv" => out = to_string(client.services(params).unwrap()),
+                    "parking" | "park" => out = to_string(client.parking(params).unwrap()),
                     _ => continue
                 }
                 println!("==========\n{}\n==========", out);
@@ -104,4 +98,11 @@ fn main() {
 
 fn to_string<T: std::fmt::Debug>(resp: Response<T>) -> String {
     resp.response.iter().map(|e| format!("{:#?}", e)).collect::<Vec<String>>().join(ITEM_SEP)
+}
+
+fn split_once(in_string: &str, delim: char) -> (&str, &str) {
+    let mut splitter = in_string.splitn(2, delim);
+    let first = splitter.next().unwrap();
+    let second = splitter.next().unwrap();
+    (first, second)
 }

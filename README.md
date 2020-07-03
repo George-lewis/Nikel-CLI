@@ -30,3 +30,6 @@ where `[type]` is any of:
 
 `tb title:algebra,price:>100`
 > Query all algebra textbooks with a price over 100 dollars
+
+`food campus:george,tags:coffee`
+> Query all restuarants downtown that serve coffee

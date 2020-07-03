@@ -10,6 +10,8 @@ Enter commands into the prompt, commands take the form:
 
 `[type] [attribute]:(operator)[value],[...]`
 
+where `[attribute]` is any attribute from the corresponding schema
+
 where `(operator)` is optional and is any of the operators described at: https://docs.nikel.ml/docs/query_guide#advanced-queries
 
 where `[type]` is any of:

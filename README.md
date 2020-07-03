@@ -2,7 +2,7 @@
 
 A sample CLI program for querying the UofT API Nikel: https://nikel.ml
 
-Using the library [Nikel-rs](https://github.com/George-lewis/Nikel-rs)
+Using the library [Nikel-rs](https://github.com/George-lewis/Nikel-rs) to access the API and the library [Rustyline](https://github.com/kkawakam/rustyline) for line-editing and history
 
 # Usage
 

@@ -531,9 +531,9 @@ dependencies = [
 
 [[package]]
 name = "nikel-rs"
-version = "0.1.0"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4f2881795d12d2bacef280ad557dafcc890933e79f66f209dc4d7f7777947f46"
+checksum = "5c7604cb856169fc6f2a6f9041a9abd6bc9840f40d4831452f2a533096885f7f"
 dependencies = [
  "reqwest",
  "serde",

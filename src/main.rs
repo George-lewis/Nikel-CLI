@@ -42,7 +42,7 @@ fn main() {
                 eprintln!("Failed to load history file {}", hf);
                 history_file = None;
             } else {
-                println!("Loaded history file {}, {} entries", hf, rl.history().len());
+                println!("Loaded history file {}, loaded {} entries", hf, rl.history().len());
             }
         } else {
             println!("History file {} doesn't exist -- not loading", hf);

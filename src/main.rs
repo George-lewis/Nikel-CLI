@@ -34,7 +34,7 @@ fn main() {
                 println!("Loaded history file {}", hf);
             }
         } else {
-            println!("History file doesn't exist -- not loading");
+            println!("History file {} doesn't exist -- not loading", hf);
         }
     }
 

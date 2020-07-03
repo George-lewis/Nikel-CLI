@@ -41,3 +41,6 @@ where `[type]` is any of:
 
 `food coordinates.latitude:>43`
 > Query all restuarants with a latitude above 43
+
+`food coordinates.latitude: >=43, coordinates.latitude: <=44, tags: pizza`
+> Query all pizza locations in [43, 44] degrees of latitude

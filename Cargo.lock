@@ -523,7 +523,7 @@ dependencies = [
 
 [[package]]
 name = "nikel-cli"
-version = "0.1.0"
+version = "0.1.5"
 dependencies = [
  "nikel-rs",
  "rustyline",

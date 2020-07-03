@@ -38,12 +38,10 @@ fn main() {
                     "courses" | "classes" => {
                         let r = client.courses(map).unwrap();
                         out = to_string(r);
-                        // out = r.response.iter().map(|e| format!("{}|{}: {}", e.code.as_ref().unwrap(), e.campus.as_ref().unwrap(), e.description.as_ref().unwrap())).collect::<Vec<String>>().join("\n-----\n");
                     },
                     "textbooks" | "tb" => {
                         let r = client.textbooks(map).unwrap();
                         out = to_string(r);
-                        // out = r.response.iter().map(|e| format!("{}|{}: ${}", e.title.as_ref().unwrap(), e.author.as_ref().unwrap(), e.price.as_ref().unwrap())).collect::<Vec<String>>().join("\n-----\n");        
                     },
                     "exams" => {
                         let r = client.exams(map).unwrap();

@@ -43,21 +43,16 @@ fn main() {
         let result = rl.readline(PROMPT);
         match result {
             Ok(line) => {
-
                 rl.add_history_entry(&line);
-
                 if line.trim().is_empty() {
                     continue;
                 }
-
                 let input: Vec<&str> = line
                                         .split_ascii_whitespace()
                                         .collect();
-
                 if input.len() < 2 {
                     continue;
                 }
-
                 let command = input[0];
 
                 // Convert input into `Parameters` (`HashMap<&str, &str>`)

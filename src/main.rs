@@ -8,6 +8,10 @@ const HISTORY_FILENAME: &str = "nikel.history";
 const ITEM_SEP: &str = "\n-----\n";
 const PROMPT: &str = ">>> ";
 
+const AUTO_ADD_HISTORY: bool = true;
+const HISTORY_IGNORE_SPACE: bool = true;
+const MAX_HISTORY: usize = 100;
+
 fn main() {
     let mut history_file: Option<String>;
 
@@ -23,9 +27,9 @@ fn main() {
     let client = NikelAPI::new();
 
     let config = Config::builder()
-                .auto_add_history(true)
-                .history_ignore_space(true)
-                .max_history_size(100)
+                .auto_add_history(AUTO_ADD_HISTORY)
+                .history_ignore_space(HISTORY_IGNORE_SPACE)
+                .max_history_size(MAX_HISTORY)
                 .build();
 
     let mut rl = Editor::<()>::with_config(config);

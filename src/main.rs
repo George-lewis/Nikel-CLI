@@ -58,27 +58,38 @@ fn main() {
                 if line.trim().is_empty() {
                     continue;
                 }
-                let (command, args) = split_once(&line, ' ');
+                let (command, args) = match split_once(&line, ' ') {
+                    Ok(tup) => tup,
+                    _ => {
+                        println!("Failed to parse command");
+                        continue;
+                    }
+                };
 
                 // Convert input into `Parameters` (`Vec<(&str, &str)>`)
                 let params: Parameters = args.split(',')
                 .map(|arg| arg.split(":").map(|e| e.trim()).collect())
+                .filter(|v: &Vec<&str>| {
+                    if v.len() != 2 {
+                        println!("Couldn't parse option {:?}, ignoring", v);
+                        false
+                    } else {
+                        true
+                    }
+                })
                 .map(|v: Vec<&str>| (v[0], v[1]))
                 .collect();
 
-                let out: String;
+                let out: String = match req(&client, command, params) {
+                    Ok(string) => string,
+                    _ => {
+                        println!("There was a problem with that request");
+                        continue;
+                    }
+                };
 
                 // Make appropriate API call
-                match command {
-                    "courses" | "classes" => out = to_string(client.courses(params).unwrap()),
-                    "textbooks" | "tb" => out = to_string(client.textbooks(params).unwrap()),
-                    "exams" => out = to_string(client.exams(params).unwrap()),
-                    "evals" => out = to_string(client.evals(params).unwrap()),
-                    "food" => out = to_string(client.food(params).unwrap()),
-                    "services" | "serv" => out = to_string(client.services(params).unwrap()),
-                    "parking" | "park" => out = to_string(client.parking(params).unwrap()),
-                    _ => continue
-                }
+                
                 println!("==========\n{}\n==========", out);
             },
             _ => {
@@ -96,13 +107,38 @@ fn main() {
 
 }
 
+fn req(client: &NikelAPI, command: &str, params: Parameters) -> Result<String, Error> {
+    let out: String;
+    match command {
+        "courses" | "classes" => out = to_string(client.courses(params)?),
+        "textbooks" | "tb" => out = to_string(client.textbooks(params)?),
+        "exams" => out = to_string(client.exams(params)?),
+        "evals" => out = to_string(client.evals(params)?),
+        "food" => out = to_string(client.food(params)?),
+        "services" | "serv" => out = to_string(client.services(params)?),
+        "parking" | "park" => out = to_string(client.parking(params)?),
+        _ => {
+            println!("Invalid command");
+            out = "".to_owned();
+            ()
+        }
+    }
+    return Ok(out);
+}
+
 fn to_string<T: std::fmt::Debug>(resp: Response<T>) -> String {
     resp.response.iter().map(|e| format!("{:#?}", e)).collect::<Vec<String>>().join(ITEM_SEP)
 }
 
-fn split_once(in_string: &str, delim: char) -> (&str, &str) {
+fn split_once(in_string: &str, delim: char) -> Result<(&str, &str), ()> {
     let mut splitter = in_string.splitn(2, delim);
-    let first = splitter.next().unwrap();
-    let second = splitter.next().unwrap();
-    (first, second)
+    let first = match splitter.next() {
+        Some(s) => s,
+        _ => return Err(())
+    };
+    let second = match splitter.next() {
+        Some(s) => s,
+        _ => return Err(())
+    };
+    Ok((first, second))
 }

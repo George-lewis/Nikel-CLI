@@ -76,6 +76,6 @@ fn main() {
     rl.save_history(HISTORY_FILE).ok();
 }
 
-fn to_string<T: std::fmt::Debug>(x: Response<T>) -> String {
-    x.response.iter().map(|e| format!("{:#?}", e)).collect::<Vec<String>>().join(ITEM_SEP)
+fn to_string<T: std::fmt::Debug>(resp: Response<T>) -> String {
+    resp.response.iter().map(|e| format!("{:#?}", e)).collect::<Vec<String>>().join(ITEM_SEP)
 }

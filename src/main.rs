@@ -1,4 +1,4 @@
-use rustyline::Editor;
+use rustyline::{Editor, Config};
 use nikel_rs::NikelAPI;
 use nikel_rs::*;
 
@@ -21,7 +21,14 @@ fn main() {
     }
 
     let client = NikelAPI::new();
-    let mut rl = Editor::<()>::new();
+
+    let config = Config::builder()
+                .auto_add_history(true)
+                .history_ignore_space(true)
+                .max_history_size(100)
+                .build();
+
+    let mut rl = Editor::<()>::with_config(config);
 
     // Load history safely
     if history_file.as_ref().is_some() {
@@ -31,7 +38,7 @@ fn main() {
                 eprintln!("Failed to load history file {}", hf);
                 history_file = None;
             } else {
-                println!("Loaded history file {}", hf);
+                println!("Loaded history file {}, {} entries", hf, rl.history().len());
             }
         } else {
             println!("History file {} doesn't exist -- not loading", hf);
@@ -43,7 +50,7 @@ fn main() {
         let result = rl.readline(PROMPT);
         match result {
             Ok(line) => {
-                rl.add_history_entry(&line);
+                
                 if line.trim().is_empty() {
                     continue;
                 }

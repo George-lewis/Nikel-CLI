@@ -38,34 +38,13 @@ fn main() {
                 }
                 let out: String;
                 match command {
-                    "courses" | "classes" => {
-                        let r = client.courses(map).unwrap();
-                        out = to_string(r);
-                    },
-                    "textbooks" | "tb" => {
-                        let r = client.textbooks(map).unwrap();
-                        out = to_string(r);
-                    },
-                    "exams" => {
-                        let r = client.exams(map).unwrap();
-                        out = to_string(r);
-                    },
-                    "evals" => {
-                        let r = client.evals(map).unwrap();
-                        out = to_string(r);
-                    },
-                    "food" => {
-                        let r = client.food(map).unwrap();
-                        out = to_string(r);
-                    },
-                    "services" | "serv" => {
-                        let r = client.services(map).unwrap();
-                        out = to_string(r);
-                    },
-                    "parking" | "park" => {
-                        let r = client.parking(map).unwrap();
-                        out = to_string(r);
-                    }
+                    "courses" | "classes" => out = to_string(client.courses(map).unwrap()),
+                    "textbooks" | "tb" => out = to_string(client.textbooks(map).unwrap()),
+                    "exams" => out = to_string(client.exams(map).unwrap()),
+                    "evals" => out = to_string(client.evals(map).unwrap()),
+                    "food" => out = to_string(client.food(map).unwrap()),
+                    "services" | "serv" => out = to_string(client.services(map).unwrap()),
+                    "parking" | "park" => out = to_string(client.parking(map).unwrap()),
                     _ => continue
                 }
                 println!("==========\n{}\n==========", out);

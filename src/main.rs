@@ -13,7 +13,7 @@ fn main() {
 
     // Get history file
     match std::env::temp_dir().to_str() {
-        Some(temp_dir) => history_file = Some(format!("{}/{}", temp_dir, HISTORY_FILENAME)),
+        Some(temp_dir) => history_file = Some(format!("{}{}{}", temp_dir, std::path::MAIN_SEPARATOR, HISTORY_FILENAME)),
         _ => {
             eprintln!("Couldn't get temporary dir, history will not be saved");
             history_file = None;

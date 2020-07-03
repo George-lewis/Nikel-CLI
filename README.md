@@ -38,3 +38,6 @@ where `[type]` is any of:
 
 `food campus:george, tags: coffee, tags:snacks, address: bloor`
 > Query all restuarants downtown that serve coffee, snacks, and are on Bloor street
+
+`food coordinates.latitude:>43`
+> Query all restuarants with a latitude above 43

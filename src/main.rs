@@ -27,10 +27,10 @@ fn main() {
                     continue;
                 }
                 let command = input[0];
-                let args: Parameters = input[1].split(",").map(|arg| {
-                    let x: Vec<&str> = arg.split(":").collect();
-                    return (x[0], x[1]);
-                }).collect();
+                let args: Parameters = input[1].split(",")
+                .map(|arg| arg.split(":").collect())
+                .map(|v: Vec<&str>| (v[0], v[1]))
+                .collect();
                 let out: String;
                 match command {
                     "courses" | "classes" => out = to_string(client.courses(args).unwrap()),

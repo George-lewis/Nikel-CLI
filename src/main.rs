@@ -107,22 +107,17 @@ fn main() {
 
 }
 
-fn req(client: &NikelAPI, command: &str, params: Parameters) -> Result<String, Error> {
-    let out: String;
-    match command {
-        "courses" | "classes" => out = to_string(client.courses(params)?),
-        "textbooks" | "tb" => out = to_string(client.textbooks(params)?),
-        "exams" => out = to_string(client.exams(params)?),
-        "evals" => out = to_string(client.evals(params)?),
-        "food" => out = to_string(client.food(params)?),
-        "services" | "serv" => out = to_string(client.services(params)?),
-        "parking" | "park" => out = to_string(client.parking(params)?),
-        _ => {
-            println!("Invalid command");
-            out = "".to_owned();
-            ()
-        }
-    }
+fn req(client: &NikelAPI, command: &str, params: Parameters) -> Result<String, Box<dyn std::error::Error>> {
+    let out = match command {
+        "courses" | "classes" => to_string(client.courses(params)?),
+        "textbooks" | "tb" => to_string(client.textbooks(params)?),
+        "exams" => to_string(client.exams(params)?),
+        "evals" => to_string(client.evals(params)?),
+        "food" => to_string(client.food(params)?),
+        "services" | "serv" => to_string(client.services(params)?),
+        "parking" | "park" => to_string(client.parking(params)?),
+        _ => return Err("".into()) // Why..
+    };
     return Ok(out);
 }
 

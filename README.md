@@ -8,7 +8,9 @@ Using the library [Nikel-rs](https://github.com/George-lewis/Nikel-rs) to access
 
 Enter commands into the prompt, commands take the form:
 
-`[type] [attribute]:(operator)[value],[...]`
+`[type] [attribute]:(operator)[value],( )[...]`
+
+Where a space after the comma is optional
 
 where `[attribute]` is any attribute from the corresponding schema
 
@@ -28,8 +30,11 @@ where `[type]` is any of:
 `courses code:csc108,campus:mis`
 > Query all courses with `csc108` in the `code` (e.g. `CSC108H1`) and `mis` in the `campus` (e.g. `mississauga`)
 
-`tb title:algebra,price:>100`
+`tb title:algebra, price:>100`
 > Query all algebra textbooks with a price over 100 dollars
 
 `food campus:george,tags:coffee`
 > Query all restuarants downtown that serve coffee
+
+`food campus:george, tags:coffee, tags:snacks, address:bloor`
+> Query all restuarants downtown that serve coffee, snacks, and are on Bloor street

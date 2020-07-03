@@ -24,6 +24,9 @@ fn main() {
                 let input: Vec<&str> = line
                                         .split_ascii_whitespace()
                                         .collect();
+                if input.len() < 2 {
+                    continue;
+                }
                 let command = input[0];
                 let args: Vec<(&str, &str)> = input[1].split(",").map(|arg| {
                     let x: Vec<&str> = arg.split(":").collect();
@@ -63,7 +66,7 @@ fn main() {
                         let r = client.parking(map).unwrap();
                         out = to_string(r);
                     }
-                    _ => panic!()
+                    _ => continue
                 }
                 println!("==========\n{}\n==========", out);
             },

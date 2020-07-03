@@ -3,7 +3,6 @@ use nikel_rs::NikelAPI;
 use nikel_rs::*;
 
 use std::vec::Vec;
-use std::collections::hash_map::HashMap;
 
 const HISTORY_FILE: &str = "/tmp/nikel.history";
 const ITEM_SEP: &str = "\n-----\n";
@@ -28,23 +27,19 @@ fn main() {
                     continue;
                 }
                 let command = input[0];
-                let args: Vec<(&str, &str)> = input[1].split(",").map(|arg| {
+                let args: Parameters = input[1].split(",").map(|arg| {
                     let x: Vec<&str> = arg.split(":").collect();
                     return (x[0], x[1]);
                 }).collect();
-                let mut map = HashMap::<&str, &str>::new();
-                for (k, v) in args {
-                    map.insert(k, v);
-                }
                 let out: String;
                 match command {
-                    "courses" | "classes" => out = to_string(client.courses(map).unwrap()),
-                    "textbooks" | "tb" => out = to_string(client.textbooks(map).unwrap()),
-                    "exams" => out = to_string(client.exams(map).unwrap()),
-                    "evals" => out = to_string(client.evals(map).unwrap()),
-                    "food" => out = to_string(client.food(map).unwrap()),
-                    "services" | "serv" => out = to_string(client.services(map).unwrap()),
-                    "parking" | "park" => out = to_string(client.parking(map).unwrap()),
+                    "courses" | "classes" => out = to_string(client.courses(args).unwrap()),
+                    "textbooks" | "tb" => out = to_string(client.textbooks(args).unwrap()),
+                    "exams" => out = to_string(client.exams(args).unwrap()),
+                    "evals" => out = to_string(client.evals(args).unwrap()),
+                    "food" => out = to_string(client.food(args).unwrap()),
+                    "services" | "serv" => out = to_string(client.services(args).unwrap()),
+                    "parking" | "park" => out = to_string(client.parking(args).unwrap()),
                     _ => continue
                 }
                 println!("==========\n{}\n==========", out);

@@ -80,17 +80,17 @@ fn main() {
                 .map(|v: Vec<&str>| (v[0], v[1]))
                 .collect();
 
-                let out: String = match req(&client, command, params) {
-                    Ok(string) => string,
+                // Make appropriate API call
+                 match req(&client, command, params) {
+                    Ok(string) => {
+                        println!("==========\n{}\n==========", string);
+                    },
                     _ => {
                         println!("There was a problem with that request");
                         continue;
                     }
                 };
-
-                // Make appropriate API call
                 
-                println!("==========\n{}\n==========", out);
             },
             _ => {
                 println!("Exit");
